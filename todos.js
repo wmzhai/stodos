@@ -28,6 +28,12 @@ if(Meteor.isClient){
                 var documentId = this._id;
                 Todos.remove({_id: documentId});
             }
+        },
+        'keyup .todo-value': function(event){
+            event.preventDefault();
+            var todoValue = event.target.value;
+            var documentId = this._id;
+            Todos.update({_id: documentId},{$set: {title: todoValue}});
         }
     });
 }
