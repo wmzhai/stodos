@@ -16,6 +16,7 @@ if(Meteor.isClient){
                 completed: false,
                 createAt : new Date()
             });
+            event.target.todoValue.value = "";
         }
     });
 }
