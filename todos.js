@@ -30,10 +30,35 @@ if(Meteor.isClient){
             }
         },
         'keyup .todo-value': function(event){
-            event.preventDefault();
-            var todoValue = event.target.value;
-            var documentId = this._id;
-            Todos.update({_id: documentId},{$set: {title: todoValue}});
+            if(event.which == 13 || event.which == 27){
+                event.target.blur();
+            } else {
+                var todoValue = event.target.value;
+                var documentId = this._id;
+                Todos.update({_id: documentId}, {$set: {title: todoValue}});
+            }
+        },
+        'change [type=checkbox]' : function(){
+            console.log("You checked or unchecked this checkbox");
+            var isCompleted = this.completed;
+            if( isCompleted){
+                Todos.update({_id : this._id},{$set :{completed : false}});
+                console.log("Task marked as incomplete.");
+            }else{
+                Todos.update({_id : this._id},{$set :{completed: true}});
+                console.log("Task marked as complte.");
+            }
+        }
+    });
+
+    Template.todoItem.helpers({
+        'checked': function(){
+            var isCompleted = this.completed;
+            if(isCompleted){
+                return "checked";
+            } else {
+                return "";
+            }
         }
     });
 }
