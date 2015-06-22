@@ -23,6 +23,8 @@ Router.route('/list/:_id', function(){
            return Lists.findOne(currentList);
        }
     });
+},{
+    name : 'listPage'
 });
 
 
