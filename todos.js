@@ -19,6 +19,14 @@ if(Meteor.isClient){
             event.target.todoValue.value = "";
         }
     });
+
+    Template.todoItem.events({
+        'click .delete-todo' : function(event){
+            event.preventDefault();
+            var documentId = this._id;
+            Todos.remove({_id: documentId});
+        }
+    });
 }
 
 
