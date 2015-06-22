@@ -92,11 +92,13 @@ if(Meteor.isClient){
     });
 
     Template.todosCount.helpers({
-        'totalTodos' : function(){
-            return Todos.find().count();
+        'totalTodos': function(){
+            var currentList = this._id;
+            return Todos.find({listId: currentList}).count();
         },
-        'completedTodos' : function(){
-            return Todos.find({completed : true}).count();
+        'completedTodos': function(){
+            var currentList = this._id;
+            return Todos.find({listId: currentList, checked: true}).count();
         }
     });
 
