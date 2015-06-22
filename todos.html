@@ -23,6 +23,7 @@
 </template>
 
 <template name="todosList">
+    <p>{{_id}}</p>
     {{> addTodo}}
     <ul>
         {{#each todo}}
@@ -82,4 +83,5 @@
 
 <template name="listPage">
     <h2>Tasks: {{name}}</h2>
+    {{> todosList}}
 </template>

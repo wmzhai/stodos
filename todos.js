@@ -37,10 +37,12 @@ if(Meteor.isClient){
         'submit form' : function(event){
             event.preventDefault();
             var todoValue = event.target.todoValue.value;
+            var currentList = this._id;
             Todos.insert({
                 title: todoValue,
                 completed: false,
-                createAt : new Date()
+                createAt : new Date(),
+                listId : currentList
             });
             event.target.todoValue.value = "";
         }
