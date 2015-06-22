@@ -23,8 +23,11 @@ if(Meteor.isClient){
     Template.todoItem.events({
         'click .delete-todo' : function(event){
             event.preventDefault();
-            var documentId = this._id;
-            Todos.remove({_id: documentId});
+            var confirm = window.confirm('delete this task?');
+            if( confirm){
+                var documentId = this._id;
+                Todos.remove({_id: documentId});
+            }
         }
     });
 }
