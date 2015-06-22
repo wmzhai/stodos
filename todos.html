@@ -15,6 +15,7 @@
             {{> todoItem}}
         {{/each}}
     </ul>
+    {{> todosCount}}
 </template>
 
 <template name="todoItem">
@@ -31,4 +32,9 @@
         Create A Task
         <input type="text" placeholder="add todo item here... " name="todoValue">
     </form>
+</template>
+
+
+<template name="todosCount">
+    <p>You have completed {{completedTodos}} out of {{totalTodos}} tasks.</p>
 </template>
