@@ -3,14 +3,27 @@
 </head>
 
 <body>
-    {{> todosList}}
+
+  {{> todosList}}
 </body>
 
 
 <template name="todosList">
+    {{> addTodo}}
     <ul>
         {{#each todo}}
-            <li>{{title}}</li>
+            {{> todoItem}}
         {{/each}}
     </ul>
+</template>
+
+<template name="todoItem">
+    <li>{{title}}</li>
+</template>
+
+<template name="addTodo">
+    <form>
+        Create A Task
+        <input type="text" placeholder="add todo item here... " name="todoValue">
+    </form>
 </template>
