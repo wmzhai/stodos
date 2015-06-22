@@ -72,8 +72,14 @@
     <h2>Lists</h2>
     {{> addList}}
     <ul>
-        {{#each list}}
-            <li>{{name}}</li>
-        {{/each}}
+        <ul>
+            {{#each list}}
+                <li><a href="/list/{{_id}}">{{name}}</a></li>
+            {{/each}}
+        </ul>
     </ul>
+</template>
+
+<template name="listPage">
+    <h2>Tasks: {{name}}</h2>
 </template>

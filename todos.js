@@ -15,6 +15,10 @@ Router.route('/',function(){
         name: 'home'
 });
 
+Router.route('/list/:_id', function(){
+    this.render('listPage');
+});
+
 if(Meteor.isClient){
     Template.todosList.helpers({
        'todo' : function(){
@@ -101,6 +105,12 @@ if(Meteor.isClient){
     Template.lists.helpers({
         'list': function(){
             return Lists.find({}, {sort: {name: 1}})
+        }
+    });
+
+    Template.listPage.helpers({
+        'name': function(){
+            return "This is the name of a list"
         }
     });
 }
