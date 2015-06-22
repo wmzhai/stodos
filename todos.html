@@ -3,6 +3,7 @@
 <template name="main">
     <h1>Todos</h1>
     {{> navigation}}
+    {{> lists}}
     {{> yield}}
     <hr />
     <p>Copyright &copy; Todos, 2014-2015.</p>
@@ -58,4 +59,21 @@
 
 <template name="login">
     <h2>Login</h2>
+</template>
+
+
+<template name="addList">
+    <form>Create a list:
+        <input type="text" placeholder="List name here..." name="listName">
+    </form>
+</template>
+
+<template name="lists">
+    <h2>Lists</h2>
+    {{> addList}}
+    <ul>
+        {{#each list}}
+            <li>{{name}}</li>
+        {{/each}}
+    </ul>
 </template>

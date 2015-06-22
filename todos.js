@@ -1,4 +1,5 @@
 Todos = new Meteor.Collection('todos');
+Lists = new Meteor.Collection('lists');
 
 
 Router.configure({
@@ -82,6 +83,24 @@ if(Meteor.isClient){
         },
         'completedTodos' : function(){
             return Todos.find({completed : true}).count();
+        }
+    });
+
+
+    Template.addList.events({
+        'submit form': function(event){
+            event.preventDefault();
+            var listName = event.target.listName.value;
+            Lists.insert({
+                name: listName
+            });
+            event.target.listName.value = "";
+        }
+    });
+
+    Template.lists.helpers({
+        'list': function(){
+            return Lists.find({}, {sort: {name: 1}})
         }
     });
 }
