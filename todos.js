@@ -2,6 +2,9 @@ Todos = new Meteor.Collection('todos');
 
 Router.route('/register');
 Router.route('/login');
+Router.route('/',function(){
+   this.render('home');
+});
 
 if(Meteor.isClient){
     Template.todosList.helpers({
