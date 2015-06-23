@@ -111,6 +111,9 @@ if(Meteor.isClient){
             var listName = event.target.listName.value;
             Lists.insert({
                 name: listName
+            },function(error, document){
+                console.log(document);
+                Router.go('listPage',{_id:document});
             });
             event.target.listName.value = "";
         }
