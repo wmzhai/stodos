@@ -7,6 +7,18 @@ Router.configure({
 });
 
 
+Router.onBeforeAction(function(){
+    var currentUser = Meteor.userId();
+    if(currentUser){
+        this.next();
+    }else{
+        this.render('login');
+    }
+},{
+    only : 'listPage'
+});
+
+
 Router.route('/register');
 Router.route('/login');
 Router.route('/',function(){
@@ -20,7 +32,8 @@ Router.route('/list/:_id', function(){
     this.render('listPage', {
        data : function(){
            var currentList = this.params._id;
-           return Lists.findOne(currentList);
+           var currentUser = Meteor.userId();
+           return Lists.findOne({_id: currentList, createdBy : currentUser});
        }
     });
 },{
@@ -76,7 +89,8 @@ if(Meteor.isClient){
     Template.todosList.helpers({
         'todo': function(){
             var currentList = this._id;
-            return Todos.find({listId: currentList}, {sort: {createdAt: -1}})
+            var currentUser = Meteor.userId();
+            return Todos.find({listId: currentList, createdBy : currentUser}, {sort: {createdAt: -1}})
         }
     });
 
@@ -84,11 +98,13 @@ if(Meteor.isClient){
         'submit form' : function(event){
             event.preventDefault();
             var todoValue = event.target.todoValue.value;
+            var currentUser = Meteor.userId();
             var currentList = this._id;
             Todos.insert({
                 title: todoValue,
                 completed: false,
-                createAt : new Date(),
+                createdAt : new Date(),
+                createdBy : currentUser,
                 listId : currentList
             });
             event.target.todoValue.value = "";
@@ -153,8 +169,10 @@ if(Meteor.isClient){
         'submit form': function(event){
             event.preventDefault();
             var listName = event.target.listName.value;
+            var currentUser = Meteor.userId();
             Lists.insert({
-                name: listName
+                name: listName,
+                createdBy: currentUser
             },function(error, document){
                 console.log(document);
                 Router.go('listPage',{_id:document});
