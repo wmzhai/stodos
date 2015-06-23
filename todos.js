@@ -47,9 +47,13 @@ if(Meteor.isClient){
             Accounts.createUser({
                 email : email,
                 password : password
+            },function(error){
+                if(error){
+                    console.log(error.reason);
+                }else{
+                    Router.go('home');
+                }
             });
-
-            Router.go('home');
         }
     });
 
@@ -59,8 +63,13 @@ if(Meteor.isClient){
             var email = event.target.email.value;
             var password = event.target.password.value;
 
-            Meteor.loginWithPassword(email,password);
-
+            Meteor.loginWithPassword(email,password,function(error){
+                if(error){
+                    console.log(error.reason);
+                }else{
+                    Router.go('home');
+                }
+            });
         }
     });
 
