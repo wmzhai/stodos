@@ -30,6 +30,14 @@ Router.route('/list/:_id', function(){
 
 if(Meteor.isClient){
 
+    Template.navigation.events({
+       'click .logout' : function(event){
+           event.preventDefault();
+           Meteor.logout();
+           Router.go('login');
+       }
+    });
+
     Template.register.events({
         'submit form' : function(){
             event.preventDefault();
