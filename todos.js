@@ -29,6 +29,22 @@ Router.route('/list/:_id', function(){
 
 
 if(Meteor.isClient){
+
+    Template.register.events({
+        'submit form' : function(){
+            event.preventDefault();
+            var email = event.target.email.value;
+            var password = event.target.password.value;
+
+            Accounts.createUser({
+                email : email,
+                password : password
+            });
+
+            Router.go('home');
+        }
+    });
+
     Template.todosList.helpers({
         'todo': function(){
             var currentList = this._id;
