@@ -107,6 +107,7 @@ if(Meteor.isClient){
                 createdBy : currentUser,
                 listId : currentList
             });
+            document.title = todoValue;
             event.target.todoValue.value = "";
         }
     });
